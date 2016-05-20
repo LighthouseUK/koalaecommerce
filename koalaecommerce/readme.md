@@ -1,0 +1,1 @@
+In order to run the test suite you will need to install the Paste, requests python packages.
