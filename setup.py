@@ -12,5 +12,5 @@ setup(
     keywords=['gae', 'lighthouse', 'koala'],  # arbitrary keywords
     classifiers=[],
     requires=['koalacore', 'blinker', 'satchless', 'itsdangerous', 'prices', 'pycrypto'],
-    tests_require=['paste', 'webapp2', 'requests', 'splinter', 'koalamail', 'koalasendgrid'],
+    #tests_require=['paste', 'webapp2', 'requests', 'splinter', 'koalamail', 'koalasendgrid'],
 )
