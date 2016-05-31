@@ -221,6 +221,7 @@ class SagePay(BasePaymentGateway):
                                       additional_details={
                                           'gateway_message': parsed_response['StatusDetail'],
                                           'card_type': parsed_response.get('CardType', ''),
+                                          'tx_auth_no': parsed_response.get('TxAuthNo', ''),
                                       })
 
     @staticmethod
