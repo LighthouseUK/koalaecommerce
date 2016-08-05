@@ -362,10 +362,10 @@ class Order(koalacore.Resource):
     @staticmethod
     def generate_order_reference(order_type):
         random_token = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(5)])
-        return '{}{}-{0}{1}'.format(order_type, datetime.datetime.now().strftime("%y"), random_token, datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
+        return '{}{}-{}{}'.format(order_type, datetime.datetime.now().strftime("%y"), random_token, datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
 
     def update_order_reference(self):
-        self.order_reference = self.generate_order_reference()
+        self.order_reference = self.generate_order_reference(order_type=self.order_type)
 
     def validate(self):
         valid = True
