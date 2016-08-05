@@ -352,7 +352,7 @@ class Order(koalacore.Resource):
     def __init__(self, **kwargs):
         # We only want to generate a new reference if one is missing or if order is not complete.
         if 'order_reference' not in kwargs or not kwargs['order_reference']:
-            kwargs['order_reference'] = self.generate_order_reference()
+            kwargs['order_reference'] = self.generate_order_reference(order_type=kwargs.get('order_type', 'default'))
 
         if 'basket' not in kwargs or not isinstance(kwargs['basket'], Basket):
             kwargs['basket'] = Basket()
@@ -360,9 +360,9 @@ class Order(koalacore.Resource):
         super(Order, self).__init__(**kwargs)
 
     @staticmethod
-    def generate_order_reference():
+    def generate_order_reference(order_type):
         random_token = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(5)])
-        return 'GT16-{0}{1}'.format(random_token, datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
+        return '{}{}-{0}{1}'.format(order_type, datetime.datetime.now().strftime("%y"), random_token, datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
 
     def update_order_reference(self):
         self.order_reference = self.generate_order_reference()
