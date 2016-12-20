@@ -15,8 +15,6 @@ import datetime
 import random
 import string
 import decimal
-import config.inventory
-import config.price_modifiers
 from satchless.item import Item
 from satchless.cart import Cart, CartLine
 from koalaecommerce.baseinventory import CustomisableItem, CustomisableStockedItem
@@ -667,22 +665,22 @@ def _block_completed_order_deletion(sender, resource_uid, **kwargs):
 signal('pre_delete').connect(_block_completed_order_deletion, sender=Orders)
 
 
-class Inventory(object):
-    _api_name = 'inventory'
-
-    @classmethod
-    def get(cls, sku, customization_options=None, **kwargs):
-        signal('get.hook').send(cls, sku=sku)
-        return config.inventory.InventoryManager.get_inventory_item(sku=sku, customization_options=customization_options, **kwargs)
-
-
-class Pricing(object):
-    _api_name = 'pricing'
-
-    @classmethod
-    def get_all(cls, order, **kwargs):
-        signal('get.hook').send(cls, order=order)
-        return config.price_modifiers.PricingManager.get_all(order=order, **kwargs)
+# class Inventory(object):
+#     _api_name = 'inventory'
+#
+#     @classmethod
+#     def get(cls, sku, customization_options=None, **kwargs):
+#         signal('get.hook').send(cls, sku=sku)
+#         return InventoryManager.get_inventory_item(sku=sku, customization_options=customization_options, **kwargs)
+#
+#
+# class Pricing(object):
+#     _api_name = 'pricing'
+#
+#     @classmethod
+#     def get_all(cls, order, **kwargs):
+#         signal('get.hook').send(cls, order=order)
+#         return PricingManager.get_all(order=order, **kwargs)
 
 
 class Payments(object):
