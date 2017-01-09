@@ -121,10 +121,10 @@ class SagePay(BasePaymentGateway):
         gateway_config['failure_url'] = cls._sanitizer.sanitize_url(gateway_config['failure_url'])
 
         # Build payment success email message
-        merchant_name = gateway_config['merchant_info']['name']
-        merchant_vat_num = gateway_config['merchant_info']['vat_number']
-        merchant_registered_address = gateway_config['merchant_info']['registered_address']
-        merchant_success_message = gateway_config['merchant_info']['success_message']
+        merchant_name = unicode(gateway_config['merchant_info']['name'])
+        merchant_vat_num = unicode(gateway_config['merchant_info']['vat_number'])
+        merchant_registered_address = unicode(gateway_config['merchant_info']['registered_address'])
+        merchant_success_message = unicode(gateway_config['merchant_info']['success_message'])
         registered_addr_str = ''
         vat_num_str = ''
 
@@ -134,9 +134,9 @@ class SagePay(BasePaymentGateway):
             customer_str = unicode('{} {}'.format(sanitized_order.customer_first_name,
                                                   sanitized_order.customer_last_name))
         if merchant_vat_num:
-            vat_num_str = '{0}'.format(merchant_vat_num)
+            vat_num_str = u'{0}'.format(merchant_vat_num)
         if merchant_registered_address:
-            registered_addr_str = '{0}'.format(merchant_registered_address)
+            registered_addr_str = u'{0}'.format(merchant_registered_address)
 
         sanitized_success_message = cls._sanitizer.sanitize_confirmation_message(merchant_success_message.format(customer=customer_str,
                                                                                                                  merchant_name=merchant_name,
